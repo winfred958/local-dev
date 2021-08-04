@@ -20,7 +20,7 @@ services:
       - ../elasticsearch/data01/log:/usr/share/elasticsearch/log
       - ../elasticsearch/data01/logs:/usr/share/elasticsearch/logs
     ports:
-      - 9200:9200
+      - 19200:9200
     networks:
       - elastic
   es02:
@@ -42,6 +42,8 @@ services:
       - ../elasticsearch/data02/data:/usr/share/elasticsearch/data
       - ../elasticsearch/data02/log:/usr/share/elasticsearch/log
       - ../elasticsearch/data02/logs:/usr/share/elasticsearch/logs
+    ports:
+      - 29200:9200
     networks:
       - elastic
   es03:
@@ -63,6 +65,8 @@ services:
       - ../elasticsearch/data03/data:/usr/share/elasticsearch/data
       - ../elasticsearch/data03/log:/usr/share/elasticsearch/log
       - ../elasticsearch/data03/logs:/usr/share/elasticsearch/logs
+    ports:
+      - 39200:9200
     networks:
       - elastic
 #volumes:
