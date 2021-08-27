@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  local-hbase:
+    image: rabbitmq:3.8-management
+    container_name: rabbitmq
+    restart: on-failure
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ../hbase/data:/hbase-data
+    ports:
+      - 5672:5672
+      - 15672:15672
