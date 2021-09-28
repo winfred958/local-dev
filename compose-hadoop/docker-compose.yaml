@@ -1,0 +1,68 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+version: "3.8"
+services:
+  namenode:
+    build: .
+    hostname: namenode
+    command: [ "hdfs", "namenode" ]
+    restart: always
+    ports:
+      - 9870:9870
+      - 50100:50100
+      - 50105:50105
+    env_file:
+      - ./config
+    environment:
+      ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+      CLUSTER_NAME: test
+  datanode:
+    build: .
+    command: [ "hdfs", "datanode" ]
+    restart: always
+    ports:
+      - 9866:9866
+      - 9864:9864
+      - 9867:9867
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./config
+  resourcemanager:
+    build: .
+    hostname: resourcemanager
+    command: [ "yarn", "resourcemanager" ]
+    restart: always
+    ports:
+      - 8088:8088
+      - 8032:8032
+      - 8030:8030
+      - 8031:8031
+      - 8033:8033
+    env_file:
+      - ./config
+    volumes:
+      - ./test.sh:/opt/test.sh
+  nodemanager:
+    build: .
+    command: [ "yarn", "nodemanager" ]
+    restart: always
+    env_file:
+      - ./config
+    ports:
+      - 8042:8042
+      - 8040:8040
+      - 8048:8048
