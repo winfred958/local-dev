@@ -8,7 +8,7 @@ services:
 
   datahub-mae-consumer:
     build:
-      context: ../
+      context: ../..
       dockerfile: docker/datahub-mae-consumer/Dockerfile
     image: linkedin/datahub-mae-consumer:${DATAHUB_VERSION:-head}
     env_file: datahub-mae-consumer/env/docker-without-neo4j.env
@@ -22,7 +22,7 @@ services:
 
   datahub-mce-consumer:
     build:
-      context: ../
+      context: ../..
       dockerfile: docker/datahub-mce-consumer/Dockerfile
     image: linkedin/datahub-mce-consumer:${DATAHUB_VERSION:-head}
     env_file: datahub-mce-consumer/env/docker.env
