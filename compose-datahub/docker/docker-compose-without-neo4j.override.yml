@@ -15,7 +15,7 @@ services:
 
   mysql-setup:
     build:
-      context: ../..
+      context: ../
       dockerfile: docker/mysql-setup/Dockerfile
     image: acryldata/datahub-mysql-setup:head
     env_file: mysql-setup/env/docker.env

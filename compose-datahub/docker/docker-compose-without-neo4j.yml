@@ -67,7 +67,7 @@ services:
   # This "container" is a workaround to pre-create search indices
   elasticsearch-setup:
     build:
-      context: ../..
+      context: ../
       dockerfile: docker/elasticsearch-setup/Dockerfile
     image: linkedin/datahub-elasticsearch-setup:${DATAHUB_VERSION:-head}
     env_file: elasticsearch-setup/env/docker.env
@@ -78,7 +78,7 @@ services:
 
   datahub-gms:
     build:
-        context: ../..
+        context: ../
         dockerfile: docker/datahub-gms/Dockerfile
     image: linkedin/datahub-gms:${DATAHUB_VERSION:-head}
     env_file: datahub-gms/env/docker-without-neo4j.env
@@ -93,7 +93,7 @@ services:
 
   datahub-frontend-react:
     build:
-      context: ../..
+      context: ../
       dockerfile: docker/datahub-frontend/Dockerfile
     image: linkedin/datahub-frontend-react:${DATAHUB_VERSION:-head}
     env_file: datahub-frontend/env/docker.env

@@ -2,7 +2,7 @@ version: '3.8'
 services:
   datahub-gms-graphql-service:
     build:
-      context: ../..
+      context: ../
       dockerfile: docker/datahub-gms-graphql-service/Dockerfile
     image: linkedin/datahub-gms-graphql-service:${DATAHUB_VERSION:-head}
     env_file: datahub-gms-graphql-service/env/docker.env

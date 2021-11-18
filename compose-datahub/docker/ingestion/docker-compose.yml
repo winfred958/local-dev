@@ -3,7 +3,7 @@ version: '3.5'
 services:
   ingestion:
     build:
-      context: ../../..
+      context: ..//..
       dockerfile: docker/datahub-ingestion/Dockerfile
     image: linkedin/datahub-ingestion:${DATAHUB_VERSION:-head}
     hostname: ingestion
