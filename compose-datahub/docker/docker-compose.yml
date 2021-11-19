@@ -98,17 +98,17 @@ services:
     volumes:
       - neo4jdata:/data
 
-  # This "container" is a workaround to pre-create search indices
-  elasticsearch-setup:
-    build:
-      context: ../
-      dockerfile: docker/elasticsearch-setup/Dockerfile
-    image: linkedin/datahub-elasticsearch-setup:${DATAHUB_VERSION:-head}
-    env_file: elasticsearch-setup/env/docker.env
-    hostname: elasticsearch-setup
-    container_name: elasticsearch-setup
-    depends_on:
-      - elasticsearch
+#  # This "container" is a workaround to pre-create search indices
+#  elasticsearch-setup:
+#    build:
+#      context: ../
+#      dockerfile: docker/elasticsearch-setup/Dockerfile
+#    image: linkedin/datahub-elasticsearch-setup:${DATAHUB_VERSION:-head}
+#    env_file: elasticsearch-setup/env/docker.env
+#    hostname: elasticsearch-setup
+#    container_name: elasticsearch-setup
+#    depends_on:
+#      - elasticsearch
 
   datahub-gms:
     build:
@@ -120,7 +120,6 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - elasticsearch-setup
       - kafka-setup
       - mysql
       - neo4j
