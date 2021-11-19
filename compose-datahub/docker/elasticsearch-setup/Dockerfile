@@ -5,9 +5,8 @@ ARG APP_ENV=prod
 
 FROM alpine:3 as base
 ENV DOCKERIZE_VERSION v0.6.1
-COPY lib/dockerize-linux-amd64-v0.6.1.tar.gz dockerize-linux-amd64-v0.6.1.tar.gz
-RUN apk add --no-cache curl jq tar \
-    && dockerize-linux-amd64-v0.6.1.tar.gz | tar -xzv
+COPY lib/dockerize dockerize
+RUN apk add --no-cache --allow-untrusted dockerize
 
 FROM base AS prod-install
 
