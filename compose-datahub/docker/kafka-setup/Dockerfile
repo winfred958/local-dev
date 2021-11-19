@@ -10,6 +10,6 @@ ENV METADATA_CHANGE_LOG_TIMESERIES_TOPIC="MetadataChangeLog_Timeseries_v1"
 ENV METADATA_CHANGE_PROPOSAL_TOPIC="MetadataChangeProposal_v1"
 ENV FAILED_METADATA_CHANGE_PROPOSAL_TOPIC="FailedMetadataChangeProposal_v1"
 
-COPY kafka-setup.sh ./kafka-setup.sh
+COPY ./kafka-setup.sh ./kafka-setup.sh
 
 CMD ./kafka-setup.sh

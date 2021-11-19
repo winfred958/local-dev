@@ -15,7 +15,7 @@ services:
     image: linkedin/datahub-elasticsearch-setup:debug
     build:
       context: elasticsearch-setup
-      dockerfile: elasticsearch-setup/Dockerfile
+      dockerfile: Dockerfile
       args:
         APP_ENV: dev
     volumes:
@@ -26,7 +26,7 @@ services:
     image: linkedin/datahub-kafka-setup:debug
     build:
       context: kafka-setup
-      dockerfile: kafka-setup/Dockerfile
+      dockerfile: Dockerfile
       args:
         APP_ENV: dev
 
@@ -34,7 +34,7 @@ services:
     image: linkedin/datahub-gms:debug
     build:
       context: datahub-gms
-      dockerfile: datahub-gms/Dockerfile
+      dockerfile: Dockerfile
       args:
         APP_ENV: dev
     volumes:
@@ -47,7 +47,7 @@ services:
     image: linkedin/datahub-frontend-react:debug
     build:
       context: datahub-frontend
-      dockerfile: datahub-frontend/Dockerfile
+      dockerfile: Dockerfile
       args:
         APP_ENV: dev
     volumes:
