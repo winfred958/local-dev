@@ -5,7 +5,7 @@ ARG APP_ENV=prod
 
 FROM alpine:3 as base
 ENV DOCKERIZE_VERSION v0.6.1
-COPY ./lib/dockerize dockerize
+COPY docker/elasticsearch-setup/lib/dockerize dockerize
 RUN apk add --no-cache --allow-untrusted dockerize
 
 FROM base AS prod-install
