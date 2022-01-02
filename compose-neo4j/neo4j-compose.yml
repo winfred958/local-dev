@@ -10,8 +10,8 @@ services:
       - ./logs:/var/lib/neo4j/logs
     restart: always
     ports:
-      - "17474:7474"
-      - "17687:7687"
+      - "7474:7474"
+      - "7687:7687"
     env_file:
       - env/neo4j.env
     networks:
