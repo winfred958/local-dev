@@ -14,3 +14,9 @@ services:
       - "7687:7687"
     env_file:
       - env/neo4j.env
+    networks:
+      - neo4j
+
+networks:
+  neo4j:
+    driver: bridge
