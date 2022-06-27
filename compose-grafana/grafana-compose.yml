@@ -45,8 +45,6 @@ services:
       - ${PWD}/etc/graphite-exporter/graphite_mapping.conf:/etc/graphite-exporter/graphite_mapping.conf
     command:
       - --graphite.mapping-config=/etc/graphite-exporter/graphite_mapping.conf
-    depends_on:
-      - graphite-statsd
     ports:
       - "9108:9108"
       - "9109:9109"
