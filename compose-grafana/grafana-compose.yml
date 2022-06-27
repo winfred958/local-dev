@@ -6,7 +6,6 @@ services:
     hostname: grafana
     volumes:
       - ./etc/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-      - ./grafana:/var/lib/grafana
     restart: always
     environment:
       - TZ=Asia/Shanghai
