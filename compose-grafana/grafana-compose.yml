@@ -1,0 +1,56 @@
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    hostname: grafana
+    volumes:
+      - ./etc/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana:/var/lib/grafana
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - GF_SECURITY_ADMIN_PASSWORD=123456
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+
+  prometheus:
+    image: bitnami/prometheus:2.36.2
+    hostname: prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention=7d
+    volumes:
+      - ./etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./etc/prometheus/rules.d/:/etc/prometheus/rules.d/
+      - ./data/prometheus:/prometheus
+    ports:
+      - "9090:9090"
+
+  pushgateway:
+    image: bitnami/pushgateway:1.4.3
+    hostname: pushgateway
+    command: --persistence.file=/pushgateway/pushgateway.data
+    volumes:
+      - ./data/pushgateway:/pushgateway
+    ports:
+      - "9091:9091"
+
+  graphite-exporter:
+    image: prom/graphite-exporter:v0.12.1
+    hostname: graphite-exporter
+    volumes:
+      - ${PWD}/etc/graphite-exporter/graphite_mapping.conf:/etc/graphite-exporter/graphite_mapping.conf
+    command:
+      - --graphite.mapping-config=/etc/graphite-exporter/graphite_mapping.conf
+    depends_on:
+      - graphite-statsd
+    ports:
+      - "9108:9108"
+      - "9109:9109"
+      - "9109:9109/udp"
+
+
+
