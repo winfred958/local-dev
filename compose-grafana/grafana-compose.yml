@@ -6,7 +6,7 @@ services:
     hostname: grafana
     volumes:
       - ./etc/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-    restart: always
+    restart: on-failure
     environment:
       - TZ=Asia/Shanghai
       - GF_SECURITY_ADMIN_PASSWORD=123456
@@ -18,9 +18,11 @@ services:
   prometheus:
     image: bitnami/prometheus:2.36.2
     hostname: prometheus
+    user: root
+    restart: on-failure
     command:
       - --config.file=/etc/prometheus/prometheus.yml
-      - --storage.tsdb.retention=7d
+      - --storage.tsdb.retention.time=7d
     volumes:
       - ./etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./etc/prometheus/rules.d/:/etc/prometheus/rules.d/
@@ -32,6 +34,7 @@ services:
     image: bitnami/pushgateway:1.4.3
     hostname: pushgateway
     command: --persistence.file=/pushgateway/pushgateway.data
+    restart: on-failure
     volumes:
       - ./data/pushgateway:/pushgateway
     ports:
@@ -40,6 +43,7 @@ services:
   graphite-exporter:
     image: prom/graphite-exporter:v0.12.1
     hostname: graphite-exporter
+    restart: on-failure
     volumes:
       - ${PWD}/etc/graphite-exporter/graphite_mapping.conf:/etc/graphite-exporter/graphite_mapping.conf
     command:
