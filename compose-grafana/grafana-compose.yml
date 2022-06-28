@@ -12,8 +12,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=123456
     ports:
       - "3000:3000"
-    depends_on:
-      - prometheus
 
   prometheus:
     image: bitnami/prometheus:2.36.2
@@ -27,16 +25,20 @@ services:
       - ./etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./etc/prometheus/rules.d/:/etc/prometheus/rules.d/
       - ./data/prometheus:/prometheus
+    environment:
+      - TZ=Asia/Shanghai
     ports:
       - "9090:9090"
 
   pushgateway:
     image: bitnami/pushgateway:1.4.3
     hostname: pushgateway
-    command: --persistence.file=/pushgateway/pushgateway.data
     restart: on-failure
+    command: --persistence.file=/pushgateway/pushgateway.data
     volumes:
       - ./data/pushgateway:/pushgateway
+    environment:
+      - TZ=Asia/Shanghai
     ports:
       - "9091:9091"
 
@@ -45,13 +47,12 @@ services:
     hostname: graphite-exporter
     restart: on-failure
     volumes:
-      - ${PWD}/etc/graphite-exporter/graphite_mapping.conf:/etc/graphite-exporter/graphite_mapping.conf
+      - ./etc/graphite-exporter/graphite_mapping.conf:/etc/graphite-exporter/graphite_mapping.conf
     command:
       - --graphite.mapping-config=/etc/graphite-exporter/graphite_mapping.conf
+    environment:
+      - TZ=Asia/Shanghai
     ports:
       - "9108:9108"
       - "9109:9109"
       - "9109:9109/udp"
-
-
-
