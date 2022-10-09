@@ -4,9 +4,9 @@ services:
     image: neo4j:4.1.4
     volumes:
       - ./conf:/var/lib/neo4j/conf
-      - ./mnt:/var/lib/neo4j/import
-      - ./plugins:/plugins
-      - ./data:/data
+      - ./import:/var/lib/neo4j/import
+      - ./plugins:/var/lib/neo4j/plugins
+      - ./data:/var/lib/neo4j/data
       - ./logs:/var/lib/neo4j/logs
     restart: always
     ports:
