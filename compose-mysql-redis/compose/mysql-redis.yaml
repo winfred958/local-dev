@@ -9,7 +9,7 @@ services:
       - ../env/mysql.env
     volumes:
       - ../mysql/data:/var/lib/mysql
-      - ../config/my.conf:/etc/mysql/conf.d/my.conf
+      - ../config/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - "13306:3306"
     restart: on-failure
