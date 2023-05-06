@@ -2,8 +2,9 @@ version: "3.8"
 services:
   local-hbase:
     image: harisekhon/hbase:2.1
-#    image: harisekhon/hbase:1.3
+    #    image: harisekhon/hbase:1.3
     container_name: local-hbase
+    hostname: local-hbase
     restart: on-failure
     ulimits:
       memlock:
@@ -15,9 +16,10 @@ services:
       - 2181:2181
       - 8080:8080
       - 8085:8085
-      - 9090:9090
-      - 9095:9095
+      - 19090:9090
+      - 19095:9095
       - 16000:16000
       - 16010:16010
       - 16201:16201
       - 16301:16301
+      - 16020:16020
